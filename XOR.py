@@ -31,7 +31,7 @@ def export_model_for_mobile(model_name, input_node_name, output_node_name):
         f.write(output_graph_def.SerializeToString())
 
 
-xor = np.array([[0,0],[0,1],[1,0],[1,1]])
+xor = np.array([[0,0],[0,1],[1,0],[1,1],])
 y_xor = np.array([[0],[1],[1],[0]])
 
 model = Sequential(layers=[
@@ -40,7 +40,8 @@ model = Sequential(layers=[
 ])
 
 model.compile(optimizer='adam', metrics=['accuracy'], loss='binary_crossentropy')
-model.fit(xor, y_xor, epochs=1000)
+model.optimizer.lr = 0.1
+model.fit(xor, y_xor, epochs=100)
 
 print("predicting [1, 0]: ")
 print(model.predict_classes(np.asarray([[1, 0]])))
